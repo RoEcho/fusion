@@ -8,12 +8,15 @@ const props = defineProps({
   },
 });
 
+function addShoppingCart() {
+  console.log("addShoppingCart");
+}
 // const emit = defineEmits(['change', 'delete'])
 </script>
 
 <template>
   <div class="goods-item">
-    <img :src="item.imgUrl" />
+    <img v-lazy="item.imgUrl" />
     <div class="goods-name">
       <span>{{ item.name }}</span>
       <span v-if="!!item.specs"> {{ item.specs }}</span>
@@ -29,7 +32,7 @@ const props = defineProps({
         >￥{{ item.originalPrice.toFixed(2) }}</span
       >
     </div>
-    <div class="goods-cart">
+    <div class="goods-cart" @click.stop="addShoppingCart()">
       <div class="badge">1</div>
       <van-icon name="cart-o" color="white" />
     </div>

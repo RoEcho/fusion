@@ -1,3 +1,9 @@
+<script>
+  export default {
+    name: 'Home',
+  }
+</script>
+
 <script setup>
 import GoodsCard from "../components/GoodsCard.vue";
 import { ref } from "vue";
@@ -18,7 +24,8 @@ const tabList = [
   "零食",
   "绿植",
 ];
-const goodsItem = [];
+let goodsItem = [];
+
 function onClickInput(val) {
   Toast(val);
 }
@@ -44,14 +51,13 @@ function queryGoodsList() {
 }
 queryGoodsList();
 
-function goodsCardOnClick(item) {
-  console.log(this.$router)
+function toGoodsDetail(item) {
   router.push({ path: '/goods-detail', query: { goodsId: item.goodsId } })
 }
 </script>
 
 <template>
-  <div>
+  <div style="background: #f5f5f5">
     <!-- <van-search
       v-model="value"
       placeholder="请输入搜索关键词"
@@ -69,7 +75,7 @@ function goodsCardOnClick(item) {
       </van-tabs>
     </van-sticky>
     <div class="goods-list-container">
-      <GoodsCard v-for="(goodsItem, index) in goodsItem" :key="index" :item="goodsItem" @click="goodsCardOnClick(goodsItem)" />
+      <GoodsCard v-for="(goodsItem, index) in goodsItem" :key="index" :item="goodsItem" @click="toGoodsDetail(goodsItem)" />
     </div>
   </div>
 </template>
